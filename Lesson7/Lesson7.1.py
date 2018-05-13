@@ -3,8 +3,8 @@ import cv2
 
 # connect webcam
 cap = cv2.VideoCapture(0)
-lower = np.array([0, 45, 61])
-higher = np.array([255, 224, 255])
+lower = np.array([0, 45, 70])
+higher = np.array([70, 255, 255])
 # 82
 
 while (True):

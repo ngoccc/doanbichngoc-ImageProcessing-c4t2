@@ -11,7 +11,7 @@ while True:
     # if key == ord('q'):
     #     break
 
-    # add video
+    # add
     # pattern = cv2.VideoCapture("C:\\Users\\Dell\\Downloads\\video-1526792383.mp4")
     pattern = cv2.resize(I1, (I1.shape[1], I1.shape[0]))
 
@@ -58,12 +58,12 @@ while True:
             # find new corner on image through Homography
             npts = cv2.perspectiveTransform(ncorners, M)
             cv2.polylines(I2, np.int32([npts]), True, (0, 0, 255), 5)
-
             blendMask = cv2.warpPerspective(mask, M, (I2.shape[1], I2.shape[0]))
             newPattern = cv2.warpPerspective(pattern, M, (I2.shape[1], I2.shape[0]))
             im4 = I2 * (1-blendMask) + newPattern
             im4 = cv2.convertScaleAbs(im4)
             cv2.imshow("insert", im4)
+
         cv2.imshow("result", I2)
         cv2.waitKey(30)
         # OutImg2 = cv2.drawMatchesKnn(I1, kpt1, I2, kpt2, good, None)

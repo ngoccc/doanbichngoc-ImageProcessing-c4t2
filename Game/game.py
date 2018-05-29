@@ -5,8 +5,8 @@ import time
 
 # pygame.mixer.pre_init(44100, -16, 2, 4096)
 # pygame.init()
-# eat_sound = pygame.mixer.Sound("D:\\Download\\coin.wav")
-# die_sound = pygame.mixer.Sound("D:\\Download\\die.wav")
+# eat_sound = pygame.mixer.Sound("C:\\Download\\coin.wav")
+# die_sound = pygame.mixer.Sound("C:\\Download\\die.wav")
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)

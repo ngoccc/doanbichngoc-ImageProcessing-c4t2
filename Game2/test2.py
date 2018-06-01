@@ -2,24 +2,28 @@ import pygame
 from pygame.locals import *
 import math
 import random
+import cv2
+import numpy as np
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-window_height = 600
-window_width = 800
-display_surf = pygame.display.set_mode((window_width, window_height))
+display_surf = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+# display_surf = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("dancing")
+window_width, window_height = pygame.display.get_surface().get_size()
+note = pygame.image.load("E:\\C4T\\Image Processing\\Game2\\note4.png")
+note = pygame.transform.scale(note, (100, 100))
 fps = 30
 fps_clock = pygame.time.Clock()
 
 
-class Point():
+class Point:
     points = []
 
-    def __init__(self, spd, r=20):
-        self.x = random.randrange(20 + 10, window_width - (20 + 10), 5)
-        self.y = random.randrange(20 + 10, window_height - (20 + 10), 5)
+    def __init__(self, spd, r=100):
         self.radius = r
+        self.x = random.randrange(self.radius + 10, window_width - (self.radius + 10), 5)
+        self.y = random.randrange(self.radius + 10, window_height - (self.radius + 10), 5)
         self.spd = spd
         self.spawnTime = 20 / self.spd
         self.existTime = 50
@@ -27,7 +31,8 @@ class Point():
 
     def draw(self):
         for p in self.points:
-            pygame.draw.circle(display_surf, (255, 255, 255), (p[0], p[1]), self.radius, 0)
+            # pygame.draw.circle(display_surf, (255, 255, 255), (p[0], p[1]), self.radius, 0)
+            display_surf.blit(note, (p[0], p[1]))
             p[2] -= 1
 
     def spawn(self):
@@ -68,9 +73,8 @@ class Scoreboard():
         display_surf.blit(result_srf, (window_width - 150, 20))
 
 
-class Game():
-    def __init__(self, line_thickness=20):
-        self.line_thickness = line_thickness
+class Game:
+    def __init__(self):
         self.point = Point(1)
         self.score = Scoreboard()
 
@@ -78,7 +82,7 @@ class Game():
         display_surf.fill(BLACK)
 
     def update(self):
-        self.draw_arena()
+        # self.draw_arena()
         self.point.spawn()
         self.point.draw()
         self.score.display(self.score.score)
@@ -87,22 +91,56 @@ class Game():
 def main():
     pygame.init()
     game = Game()
-    speedUp = 1
+    cap = cv2.VideoCapture(0)
     while True:
+        display_surf.fill(BLACK)
+
+        ret, frame = cap.read()
+        frame = cv2.resize(frame, (window_width, window_height), cv2.INTER_CUBIC)
+        cascade = cv2.CascadeClassifier("E:\\C4T\\Image Processing\\Lesson7\\haarcascade_frontalface_alt2.xml")
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        faces = cascade.detectMultiScale(gray)
+        cx = 0
+        cy = 0
+        if len(faces) > 0:
+            xmax = faces[0, 0]
+            ymax = faces[0, 1]
+            wmax = faces[0, 2]
+            hmax = faces[0, 3]
+            for x, y, w, h in faces:
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                if w * h > wmax * hmax:
+                    xmax = x
+                    ymax = y
+                    wmax = w
+                    hmax = h
+            cx = int(xmax + wmax / 2)
+            cy = int(ymax + hmax / 2)
+            cv2.circle(frame, (cx, cy), 5, (0, 255, 0))
+
+        # for event in pygame.event.get():
+        #     if event.type == MOUSEBUTTONDOWN:
+        #         mx, my = pygame.mouse.get_pos()
+        #         if game.point.is_clicked(mx, my):
+        #             game.score.score += 1
+        #     if event.type == KEYDOWN:
+        #         break
+
+        # connect webcam
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = np.rot90(frame)
+        frame = pygame.surfarray.make_surface(frame)
+        display_surf.blit(frame, (0, 0))
+
+        if game.point.is_clicked(window_width - cx, cy):
+            game.score.score += 1
+            pygame.mixer.music.load("E:\\C4T\\Image Processing\\Game2\\SoundEffect.wav")
+            pygame.mixer.music.play(0)
         game.update()
-        for event in pygame.event.get():
-            if event.type == MOUSEBUTTONDOWN:
-                mx, my = pygame.mouse.get_pos()
-                if game.point.is_clicked(mx, my):
-                    game.score.score += 1
+
         if game.point.out_of_time():
             break
-        # if fps_clock.get_ticks() == 500:
-        #     # speed up
-        #     pass
-        # speedUp += 0.05
-        # if speedUp >= 3:
-
         pygame.display.update()
         fps_clock.tick(fps)
 

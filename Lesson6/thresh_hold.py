@@ -11,7 +11,6 @@ cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 
 ilowH = 0
 ihighH = 255
-
 ilowS = 0
 ihighS = 255
 ilowV = 0

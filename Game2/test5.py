@@ -54,7 +54,6 @@ class Point:
         self.speed = speed
         self.points.append(list(self.start_pos))
         self.spawnTime = 50
-        # self.performance = ""
         self.isMissed = False
 
     def move(self):
@@ -116,7 +115,7 @@ class Scoreboard():
 
 
 class Game:
-    def __init__(self, speed=5):
+    def __init__(self, speed=7):
         self.speed = speed
         point_speed = self.speed
         # points

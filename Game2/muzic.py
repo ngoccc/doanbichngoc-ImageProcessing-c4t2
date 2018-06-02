@@ -95,7 +95,7 @@ class Point:
 
 
 class Game:
-    def __init__(self, speed=5):
+    def __init__(self, speed=7):
         self.speed = speed
         point_speed = self.speed
         # points

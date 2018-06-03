@@ -19,7 +19,7 @@ def Scan(a, m, n):
 
 class Webcam():
     def __init__(self):
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(1)
         self.frame = self.cap.read()[1]
 
     def update(self):

@@ -22,16 +22,20 @@ upRight = pygame.image.load("E:\\hmm\\images\\UpRight.png")
 downLeft = pygame.image.load("E:\\hmm\\images\\DownLeft.png")
 downRight = pygame.image.load("E:\\hmm\\images\\DownRight.png")
 
-
 center = pygame.image.load("E:\\hmm\\images\\Center.png")
 glow = pygame.image.load("E:\\hmm\\images\\Glow.png")
 
+# load music
+pygame.mixer.init(44100, -16, 2, 2048)
+pygame.mixer.music.load("E:\\C4T\\Image Processing\\Game2\\Lucky-Strike.mp3")
+pygame.mixer.music.set_volume(0.5)
+
 # starting positions
 
-posUpLeft = (window_width / 2 - 74, window_height / 2 - 74)
-posUpRight = (window_width / 2 + 10, window_height / 2 - 74)
-posDownLeft = (window_width / 2 - 74, window_height / 2 + 10)
-posDownRight = (window_width / 2 + 10, window_height / 2 + 10)
+posUpLeft = (window_height / 2 - 74, window_height / 2 - 74)
+posUpRight = (window_width - (window_height/2 - 10), window_height / 2 - 74)
+posDownLeft = (window_height / 2 - 74, window_height / 2 + 10)
+posDownRight = (window_width - (window_height/2 - 10), window_height / 2 + 10)
 
 # button positions
 
@@ -49,7 +53,7 @@ class Point:
         self.direction = dir
         self.start_pos = start_pos
         self.speed = speed
-        self.points.append(list(self.start_pos))
+        # self.points.append(list(self.start_pos))
         self.spawnTime = 50
         self.isMissed = False
 
@@ -89,12 +93,11 @@ class Point:
         for p in self.points:
             display_surf.blit(self.image, (p[0], p[1]))
 
+    def add(self):
+        self.points.append(list(self.start_pos))
+
     def spawn(self):
-        if self.spawnTime > 0:
-            self.spawnTime -= 1
-        else:
-            self.points.append(list(self.start_pos))
-            self.spawnTime = 50
+        self.spawnTime += 1
 
 
 class Scoreboard():
@@ -126,10 +129,129 @@ class Game:
         self.great = 0
         self.bad = 0
         self.miss = 0
-        self.combo = []
         self.performance = ""
 
     def update(self):
+        if self.upLeft.spawnTime == 0:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 36:
+            self.upRight.add()
+        if self.upLeft.spawnTime == 76:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 115:
+            self.upRight.add()
+        if self.downRight.spawnTime == 142:  #moti
+            self.downRight.add()
+        if self.upLeft.spawnTime == 180 and self.downRight.spawnTime == 180:
+            self.upLeft.add()
+            self.downRight.add()
+        if self.upRight.spawnTime == 195 and self.downLeft.spawnTime == 195:
+            self.upRight.add()
+            self.downLeft.add()
+        if self.downRight.spawnTime == 225 and self.downLeft.spawnTime == 225:
+            self.downLeft.add()
+            self.downRight.add()
+        if self.upRight.spawnTime == 235:  #yes
+            self.upRight.add()
+        if self.upRight.spawnTime == 260:  #yes
+            self.upRight.add()
+
+        if self.downLeft.spawnTime == 315:  #insti
+            self.downLeft.add()
+        if self.upRight.spawnTime == 355 and self.downLeft.spawnTime == 355:
+            self.upRight.add()
+            self.downLeft.add()
+        if self.upLeft.spawnTime == 383 and self.downRight.spawnTime == 383:
+            self.upLeft.add()
+            self.downRight.add()
+        if self.downRight.spawnTime == 403 and self.downLeft.spawnTime == 403:
+            self.downLeft.add()
+            self.downRight.add()
+        if self.upLeft.spawnTime == 420:  #that's
+            self.upLeft.add()
+        if self.upLeft.spawnTime == 447:  #that's
+            self.upLeft.add()
+
+        if self.downLeft.spawnTime == 474:
+            self.downLeft.add()
+        if self.upLeft.spawnTime == 520:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 557:
+            self.upRight.add()
+        if self.downRight.spawnTime == 594:
+            self.downRight.add()
+        if self.downRight.spawnTime == 634:
+            self.downRight.add()
+        if self.upRight.spawnTime == 674:
+            self.upRight.add()
+        if self.upLeft.spawnTime == 713:
+            self.upLeft.add()
+        if self.downLeft.spawnTime == 740:
+            self.downLeft.add()
+        if self.downRight.spawnTime == 752 and self.downLeft.spawnTime == 752:
+            self.downLeft.add()
+            self.downRight.add()
+        if self.downRight.spawnTime == 805 and self.downLeft.spawnTime == 805:
+            self.downLeft.add()
+            self.downRight.add()
+        if self.upRight.spawnTime == 825 and self.upLeft.spawnTime == 825:
+            self.upLeft.add()
+            self.upRight.add()
+        if self.upRight.spawnTime == 845 and self.upLeft.spawnTime == 845:
+            self.upLeft.add()
+            self.upRight.add()
+        if self.downRight.spawnTime == 865 and self.downLeft.spawnTime == 865:
+            self.downLeft.add()
+            self.downRight.add()
+        if self.downRight.spawnTime == 875 and self.downLeft.spawnTime == 875:
+            self.downLeft.add()
+            self.downRight.add()
+        if self.upRight.spawnTime == 895:
+            self.upRight.add()
+        if self.upRight.spawnTime == 915:
+            self.upRight.add()
+
+        if self.upRight.spawnTime == 935 and self.upLeft.spawnTime == 935:
+            self.upRight.add()
+            self.upLeft.add()
+        if self.downRight.spawnTime == 955 and self.downLeft.spawnTime == 955:
+            self.downLeft.add()
+            self.downRight.add()
+
+        if self.downRight.spawnTime == 990:
+            self.downRight.add()
+        if self.upRight.spawnTime == 1015:
+            self.upRight.add()
+        if self.upLeft.spawnTime == 1040:
+            self.upLeft.add()
+        if self.downLeft.spawnTime == 1065:
+            self.downLeft.add()
+        if self.downLeft.spawnTime == 1090:
+            self.downLeft.add()
+        if self.upLeft.spawnTime == 1115:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 1140:
+            self.upRight.add()
+        if self.downRight.spawnTime == 1165:
+            self.downRight.add()
+
+        if self.upLeft.spawnTime == 1190:
+            self.upLeft.add()
+        if self.upLeft.spawnTime == 1215:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 1240:
+            self.upRight.add()
+        if self.upRight.spawnTime == 1265:
+            self.upRight.add()
+        if self.downRight.spawnTime == 1290:
+            self.downRight.add()
+        if self.downRight.spawnTime == 1315:
+            self.downRight.add()
+        if self.upLeft.spawnTime == 1340:
+            self.upLeft.add()
+        if self.upLeft.spawnTime == 1365:
+            self.upLeft.add()
+
         self.upLeft.spawn()
         self.upLeft.move()
         self.upRight.spawn()
@@ -139,9 +261,6 @@ class Game:
         self.downRight.spawn()
         self.downRight.move()
         self.score.display(self.score.score)
-        # # display miss perfomance??
-        # if self.upLeft.performance == "MISS":
-        #     self.performance = self.upLeft.performance
         if self.upLeft.isMissed:
             self.performance = "MISS"
             self.miss += 1
@@ -189,6 +308,7 @@ def Display_Performance(s):
 
 def main():
     pygame.init()
+    pygame.mixer.music.play(1)
     game = Game()
     cam = webcam.Webcam()
     cam.thread_webcam()
@@ -263,7 +383,7 @@ def main():
                         button_x = buttonUpRight[0]
                         button_y = buttonUpRight[1]
                         distance = Distance(currentPoint_x, currentPoint_y, button_x, button_y)
-                        if currentPoint_x >= 10 and currentPoint_y >= 10:  # inside
+                        if currentPoint_x <= window_width - 74 and currentPoint_y >= 10:  # inside
                             if distance <= d / 3:
                                 game.score.score += 200
                                 game.performance = "PERFECT"
@@ -287,7 +407,7 @@ def main():
                         button_x = buttonDownLeft[0]
                         button_y = buttonDownLeft[1]
                         distance = Distance(currentPoint_x, currentPoint_y, button_x, button_y)
-                        if currentPoint_x >= 10 and currentPoint_y >= 10:  # inside
+                        if currentPoint_x >= 10 and currentPoint_y <= window_height - 74:  # inside
                             if distance <= d / 3:
                                 game.score.score += 200
                                 game.performance = "PERFECT"
@@ -310,7 +430,7 @@ def main():
                         button_x = buttonDownRight[0]
                         button_y = buttonDownRight[1]
                         distance = Distance(currentPoint_x, currentPoint_y, button_x, button_y)
-                        if currentPoint_x >= 10 and currentPoint_y >= 10:  # inside
+                        if currentPoint_x <= window_width - 74 and currentPoint_y <= window_height - 74:  # inside
                             if distance <= d / 3:
                                 game.score.score += 200
                                 game.performance = "PERFECT"

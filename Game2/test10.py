@@ -4,6 +4,22 @@ import cv2
 import numpy as np
 import math
 import webcam
+import keyboard
+
+lower = np.array([0, 0, 0])
+higher = np.array([255, 255, 117])
+
+
+def Scan(a, m, n):
+    count = 0
+    for i in range(m, m + 64 + 1):
+        for j in range(n, n + 64 + 1):
+            if a[i, j] >= 200:
+                count += 1
+    if count >= 64 * 64 / 2:
+        return True
+    return False
+
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -22,9 +38,18 @@ upRight = pygame.image.load("E:\\hmm\\images\\UpRight.png")
 downLeft = pygame.image.load("E:\\hmm\\images\\DownLeft.png")
 downRight = pygame.image.load("E:\\hmm\\images\\DownRight.png")
 
+upLeftActive = pygame.image.load("E:\\hmm\\images\\UpLeftActive.png")
+upRightActive = pygame.image.load("E:\\hmm\\images\\UpRightActive.png")
+downLeftActive = pygame.image.load("E:\\hmm\\images\\DownLeftActive.png")
+downRightActive = pygame.image.load("E:\\hmm\\images\\DownRightActive.png")
 
 center = pygame.image.load("E:\\hmm\\images\\Center.png")
 glow = pygame.image.load("E:\\hmm\\images\\Glow.png")
+
+# load music
+pygame.mixer.init(44100, -16, 2, 2048)
+pygame.mixer.music.load("E:\\C4T\\Image Processing\\Game2\\Lucky-Strike.mp3")
+pygame.mixer.music.set_volume(0.5)
 
 # starting positions
 
@@ -40,11 +65,6 @@ buttonUpRight = (window_width - 74, 10)
 buttonDownLeft = (10, window_height - 74)
 buttonDownRight = (window_width - 74, window_height - 74)
 
-# load music
-pygame.mixer.init(44100, -16, 2, 2048)
-pygame.mixer.music.load("E:\\C4T\\Image Processing\\Game2\\Lucky-Strike.mp3")
-pygame.mixer.music.set_volume(0.5)
-
 
 class Point:
 
@@ -54,6 +74,7 @@ class Point:
         self.direction = dir
         self.start_pos = start_pos
         self.speed = speed
+        # self.points.append(list(self.start_pos))
         self.spawnTime = 0
         self.isMissed = False
 
@@ -100,7 +121,7 @@ class Point:
         self.spawnTime += 1
 
 
-class Scoreboard():
+class Scoreboard:
     def __init__(self, fontSize=70, score=0):
         self.x = window_width / 2
         self.y = 20
@@ -114,7 +135,7 @@ class Scoreboard():
 
 
 class Game:
-    def __init__(self, speed=7):
+    def __init__(self, speed=5):
         self.speed = speed
         point_speed = self.speed
         # points
@@ -136,7 +157,7 @@ class Game:
             pygame.mixer.music.play(1)
 
         # verse 1
-        if self.upLeft.spawnTime == 0:
+        if self.upRight.spawnTime == 0:
             self.upLeft.add()
         if self.upRight.spawnTime == 34:
             self.upRight.add()
@@ -408,21 +429,8 @@ class Game:
         self.downRight.move()
         self.score.display(self.score.score)
 
-        if self.upLeft.isMissed:
-            self.performance = "MISS"
-            self.miss += 1
-        elif self.upRight.isMissed:
-            self.performance = "MISS"
-            self.miss += 1
-        elif self.downLeft.isMissed:
-            self.performance = "MISS"
-            self.miss += 1
-        elif self.downRight.isMissed:
-            self.performance = "MISS"
-            self.miss += 1
-
-        self.score.display(self.score.score)
         Display_Performance(self.performance)
+        # self.performance = ""
 
 
 def Distance(x1, y1, x2, y2):
@@ -455,43 +463,44 @@ def Display_Performance(s):
 def main():
     pygame.init()
     game = Game()
-    cam = webcam.Webcam()
-    cam.thread_webcam()
-    # cap = cv2.VideoCapture(0)
-
-    # def Scoring(pos, pos_button):
-    #     if len(game.pos.points) != 0:
-    #         currentPoint_x = game.pos.points[0][0]
-    #         currentPoint_y = game.pos.points[0][1]
-    #         button_x = pos_button[0]
-    #         button_y = pos_button[1]
-    #         distance = Distance(currentPoint_x, currentPoint_y, button_x, button_y)
-    #         if currentPoint_x >= 10 and currentPoint_y >= 10:  # inside
-    #             if distance <= d / 3:
-    #                 game.score.score += 200
-    #             elif distance <= 2 * d / 3:
-    #                 game.score.score += 100
-    #             else:
-    #                 game.score.score += 50
-    #             display_surf.blit(glow, pos_button)
-    #             game.pos.points.remove([currentPoint_x, currentPoint_y])
+    cap = cv2.VideoCapture(0)
 
     while True:
-        # cam.frame = cv2.resize(cam.frame, (window_width, window_height), cv2.INTER_CUBIC)
-        frame = cam.get_currentFrame()
-        #frame = cv2.resize(frame, (window_width, window_height), cv2.INTER_CUBIC)
+        frame = cap.read()[1]
+        frame = cv2.resize(frame, (window_width, window_height), cv2.INTER_CUBIC)
+
+        # convert to bin
+        hsvImage = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        binImage = cv2.inRange(hsvImage, lower, higher)
+        binImage = cv2.flip(binImage, 1)
 
         # connect webcam
-
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame = np.rot90(frame)
         frame = pygame.surfarray.make_surface(frame)
         display_surf.blit(frame, (0, 0))
         Draw_Elements()
 
-        # scoring
-        # upLeft
-        if cam.get_pos(buttonUpLeft[0], buttonUpLeft[1]):
+        if game.upLeft.isMissed:
+            game.performance = "MISS"
+            game.miss += 1
+            game.upLeft.isMissed = False
+        elif game.upRight.isMissed:
+            game.performance = "MISS"
+            game.miss += 1
+            game.upRight.isMissed = False
+        elif game.downLeft.isMissed:
+            game.performance = "MISS"
+            game.miss += 1
+            game.downLeft.isMissed = False
+        elif game.downRight.isMissed:
+            game.performance = "MISS"
+            game.miss += 1
+            game.downRight.isMissed = False
+
+        if Scan(binImage, buttonUpLeft[1], buttonUpLeft[0]):
+            # upLeft
+            # Scoring(upLeft, buttonUpLeft) ko dc??
             if len(game.upLeft.points) != 0:
                 game.upLeft.isMissed = False
                 currentPoint_x = game.upLeft.points[0][0]
@@ -511,6 +520,7 @@ def main():
                     else:
                         game.performance = "BAD"
                         game.bad += 1
+                    display_surf.blit(upLeftActive, buttonUpLeft)
                     display_surf.blit(glow, buttonUpLeft)
                     game.upLeft.points.remove([currentPoint_x, currentPoint_y])
 
@@ -518,8 +528,7 @@ def main():
                     game.performance = "MISS"
                     game.miss += 1
 
-        # upRight
-        if cam.get_pos(buttonUpRight[0], buttonUpRight[1]):
+        if Scan(binImage, buttonUpRight[1], buttonUpRight[0]):
             if len(game.upRight.points) != 0:
                 game.upRight.isMissed = False
                 currentPoint_x = game.upRight.points[0][0]
@@ -531,23 +540,19 @@ def main():
                     if distance <= d / 3:
                         game.score.score += 200
                         game.performance = "PERFECT"
-                        game.perfect += 1
                     elif distance <= 2 * d / 3:
                         game.score.score += 100
                         game.performance = "GREAT"
-                        game.great += 1
                     else:
                         game.performance = "BAD"
-                        game.bad += 1
+                    display_surf.blit(upRightActive, buttonUpRight)
                     display_surf.blit(glow, buttonUpRight)
                     game.upRight.points.remove([currentPoint_x, currentPoint_y])
 
                 else:
                     game.performance = "MISS"
-                    game.miss += 1
 
-        # downLeft
-        if cam.get_pos(buttonDownLeft[0], buttonDownLeft[1]):
+        if Scan(binImage, buttonDownLeft[1], buttonDownLeft[0]):
             if len(game.downLeft.points) != 0:
                 game.downLeft.isMissed = False
                 currentPoint_x = game.downLeft.points[0][0]
@@ -559,23 +564,19 @@ def main():
                     if distance <= d / 3:
                         game.score.score += 200
                         game.performance = "PERFECT"
-                        game.perfect += 1
                     elif distance <= 2 * d / 3:
                         game.score.score += 100
                         game.performance = "GREAT"
-                        game.great += 1
                     else:
                         game.performance = "BAD"
-                        game.bad += 1
+                    display_surf.blit(downLeftActive, buttonDownLeft)
                     display_surf.blit(glow, buttonDownLeft)
                     game.downLeft.points.remove([currentPoint_x, currentPoint_y])
 
                 else:
                     game.performance = "MISS"
-                    game.miss += 1
 
-        # downRight
-        if cam.get_pos(buttonDownRight[0], buttonDownRight[1]):
+        if Scan(binImage, buttonDownRight[1], buttonDownRight[0]):
             if len(game.downRight.points) != 0:
                 game.downRight.isMissed = False
                 currentPoint_x = game.downRight.points[0][0]
@@ -587,21 +588,27 @@ def main():
                     if distance <= d / 3:
                         game.score.score += 200
                         game.performance = "PERFECT"
-                        game.perfect += 1
                     elif distance <= 2 * d / 3:
                         game.score.score += 100
                         game.performance = "GREAT"
-                        game.great += 1
                     else:
                         game.performance = "BAD"
-                        game.bad += 1
+                    display_surf.blit(downRightActive, buttonDownRight)
                     display_surf.blit(glow, buttonDownRight)
                     game.downRight.points.remove([currentPoint_x, currentPoint_y])
 
                 else:
                     game.performance = "MISS"
-                    game.miss += 1
         game.update()
+        try:
+            if keyboard.is_pressed('a'):
+                break
+            else:
+                pass
+        except:
+            break
+        # if game.upLeft.spawnTime == 1000: ?????
+        #     break
         pygame.display.update()
         fps_clock.tick(fps)
 

@@ -23,6 +23,11 @@ upRight = pygame.image.load("E:\\hmm\\images\\UpRight.png")
 downLeft = pygame.image.load("E:\\hmm\\images\\DownLeft.png")
 downRight = pygame.image.load("E:\\hmm\\images\\DownRight.png")
 
+upLeftActive = pygame.image.load("E:\\hmm\\images\\UpLeftActive.png")
+upRightActive = pygame.image.load("E:\\hmm\\images\\UpRightActive.png")
+downLeftActive = pygame.image.load("E:\\hmm\\images\\DownLeftActive.png")
+downRightActive = pygame.image.load("E:\\hmm\\images\\DownRightActive.png")
+
 center = pygame.image.load("E:\\hmm\\images\\Center.png")
 glow = pygame.image.load("E:\\hmm\\images\\Glow.png")
 
@@ -499,6 +504,7 @@ def main():
                             else:
                                 game.performance = "BAD"
                                 game.bad += 1
+                            display_surf.blit(upLeftActive, buttonUpLeft)
                             display_surf.blit(glow, buttonUpLeft)
                             game.upLeft.points.remove([currentPoint_x, currentPoint_y])
 
@@ -506,7 +512,7 @@ def main():
                             game.performance = "MISS"
                             game.miss += 1
 
-                elif event.key == K_p:
+                if event.key == K_p:
                     # upRight
                     if len(game.upRight.points) != 0:
                         game.upRight.isMissed = False
@@ -524,13 +530,14 @@ def main():
                                 game.performance = "GREAT"
                             else:
                                 game.performance = "BAD"
+                            display_surf.blit(upRightActive, buttonUpRight)
                             display_surf.blit(glow, buttonUpRight)
                             game.upRight.points.remove([currentPoint_x, currentPoint_y])
 
                         else:
                             game.performance = "MISS"
 
-                elif event.key == K_z:
+                if event.key == K_z:
                     # downLeft
                     if len(game.downLeft.points) != 0:
                         game.downLeft.isMissed = False
@@ -548,12 +555,13 @@ def main():
                                 game.performance = "GREAT"
                             else:
                                 game.performance = "BAD"
+                            display_surf.blit(downLeftActive, buttonDownLeft)
                             display_surf.blit(glow, buttonDownLeft)
                             game.downLeft.points.remove([currentPoint_x, currentPoint_y])
 
                         else:
                             game.performance = "MISS"
-                elif event.key == K_m:
+                if event.key == K_m:
                     # downRight
                     if len(game.downRight.points) != 0:
                         game.downRight.isMissed = False
@@ -571,6 +579,7 @@ def main():
                                 game.performance = "GREAT"
                             else:
                                 game.performance = "BAD"
+                            display_surf.blit(downRightActive, buttonDownRight)
                             display_surf.blit(glow, buttonDownRight)
                             game.downRight.points.remove([currentPoint_x, currentPoint_y])
 

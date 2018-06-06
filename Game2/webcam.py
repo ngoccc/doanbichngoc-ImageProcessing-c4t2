@@ -8,8 +8,8 @@ higher = np.array([255, 255, 117])
 
 def Scan(a, m, n):
     count = 0
-    for i in range(m, n + 64 + 1):
-        for j in range(m, n + 64 + 1):
+    for i in range(m, m + 64 + 1):
+        for j in range(n, n + 64 + 1):
             if a[i, j] >= 200:
                 count += 1
     if count >= 64 * 64 / 2:
@@ -25,6 +25,7 @@ class Webcam():
     def update(self):
         while True:
             self.frame = self.cap.read()[1]
+            self.frame = cv2.resize(self.frame, (1366, 786), cv2.INTER_CUBIC)
 
     def thread_webcam(self):
         Thread(None, self.update).start()
@@ -35,4 +36,5 @@ class Webcam():
     def get_pos(self, x, y):
         hsvImage = cv2.cvtColor(self.frame, cv2.COLOR_RGB2HSV)
         binImage = cv2.inRange(hsvImage, lower, higher)
+        binImage = cv2.flip(binImage, 1)
         return Scan(binImage, x, y)

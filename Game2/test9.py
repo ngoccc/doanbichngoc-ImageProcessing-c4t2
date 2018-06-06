@@ -5,6 +5,20 @@ import numpy as np
 import math
 import webcam
 
+lower = np.array([0, 0, 0])
+higher = np.array([255, 255, 117])
+
+
+def Scan(a, m, n):
+    count = 0
+    for i in range(m, n + 64 + 1):
+        for j in range(m, n + 64 + 1):
+            if a[i, j] >= 200:
+                count += 1
+    if count >= 64 * 64 / 2:
+        return True
+    return False
+
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 255, 255)
@@ -136,8 +150,8 @@ class Game:
             pygame.mixer.music.play(1)
 
         # verse 1
-        if self.upLeft.spawnTime == 0:
-            self.upLeft.add()
+        if self.downLeft.spawnTime == 0:
+            self.downLeft.add()
         if self.upRight.spawnTime == 34:
             self.upRight.add()
         if self.upLeft.spawnTime == 76:
@@ -457,7 +471,7 @@ def main():
     game = Game()
     cam = webcam.Webcam()
     cam.thread_webcam()
-    # cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)
 
     # def Scoring(pos, pos_button):
     #     if len(game.pos.points) != 0:
@@ -477,9 +491,15 @@ def main():
     #             game.pos.points.remove([currentPoint_x, currentPoint_y])
 
     while True:
-        # cam.frame = cv2.resize(cam.frame, (window_width, window_height), cv2.INTER_CUBIC)
-        frame = cam.get_currentFrame()
-        #frame = cv2.resize(frame, (window_width, window_height), cv2.INTER_CUBIC)
+        frame = cap.read()[1]
+        # frame = cv2.flip(frame, 1)
+        frame = cv2.resize(frame, (window_width, window_height), cv2.INTER_CUBIC)
+
+
+        # convert to bin
+        hsvImage = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        binImage = cv2.inRange(hsvImage, lower, higher)
+        binImage = cv2.flip(binImage, 1)
 
         # connect webcam
 
@@ -491,7 +511,7 @@ def main():
 
         # scoring
         # upLeft
-        if cam.get_pos(buttonUpLeft[0], buttonUpLeft[1]):
+        if Scan(binImage, buttonUpLeft[0], buttonUpLeft[1]):
             if len(game.upLeft.points) != 0:
                 game.upLeft.isMissed = False
                 currentPoint_x = game.upLeft.points[0][0]
@@ -519,7 +539,7 @@ def main():
                     game.miss += 1
 
         # upRight
-        if cam.get_pos(buttonUpRight[0], buttonUpRight[1]):
+        if Scan(binImage, buttonUpRight[0], buttonUpRight[1]):
             if len(game.upRight.points) != 0:
                 game.upRight.isMissed = False
                 currentPoint_x = game.upRight.points[0][0]
@@ -547,7 +567,7 @@ def main():
                     game.miss += 1
 
         # downLeft
-        if cam.get_pos(buttonDownLeft[0], buttonDownLeft[1]):
+        if Scan(binImage, buttonDownLeft[0], buttonDownLeft[1]):
             if len(game.downLeft.points) != 0:
                 game.downLeft.isMissed = False
                 currentPoint_x = game.downLeft.points[0][0]
@@ -575,7 +595,7 @@ def main():
                     game.miss += 1
 
         # downRight
-        if cam.get_pos(buttonDownRight[0], buttonDownRight[1]):
+        if Scan(binImage, buttonDownRight[0], buttonDownRight[1]):
             if len(game.downRight.points) != 0:
                 game.downRight.isMissed = False
                 currentPoint_x = game.downRight.points[0][0]

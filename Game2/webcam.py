@@ -25,7 +25,7 @@ class Webcam():
     def update(self):
         while True:
             self.frame = self.cap.read()[1]
-            self.frame = cv2.resize(self.frame, (1366, 786), cv2.INTER_CUBIC)
+            #self.frame = cv2.resize(self.frame, (1366, 786), cv2.INTER_CUBIC)
 
     def thread_webcam(self):
         Thread(None, self.update).start()

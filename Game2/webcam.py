@@ -25,7 +25,7 @@ class Webcam():
     def update(self):
         while True:
             self.frame = self.cap.read()[1]
-            #self.frame = cv2.resize(self.frame, (1366, 786), cv2.INTER_CUBIC)
+            self.frame = cv2.resize(self.frame, (1366, 786), cv2.INTER_CUBIC)
 
     def thread_webcam(self):
         Thread(None, self.update).start()
@@ -33,8 +33,10 @@ class Webcam():
     def get_currentFrame(self):
         return self.frame
 
-    def get_pos(self, x, y):
+    def get_pos(self, y, x):
+        self.frame = cv2.resize(self.frame, (1366, 786), cv2.INTER_CUBIC)
         hsvImage = cv2.cvtColor(self.frame, cv2.COLOR_RGB2HSV)
         binImage = cv2.inRange(hsvImage, lower, higher)
         binImage = cv2.flip(binImage, 1)
-        return Scan(binImage, x, y)
+        return Scan(binImage, y, x)
+

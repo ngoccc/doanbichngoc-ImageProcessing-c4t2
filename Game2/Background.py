@@ -16,9 +16,9 @@ fps = 30
 fps_clock = pygame.time.Clock()
 
 
-title = pygame.image.load("E:\\C4T\Image Processing\\Game2\\images\\start\\text_startmenu.png")
+title = pygame.image.load("images\\start\\text_startmenu.png")
 title = pygame.transform.scale(title, (window_width, window_height))
-start = pygame.image.load("E:\\C4T\\Image Processing\\Game2\\images\\start\\Press Start.png")
+start = pygame.image.load("images\\start\\Press Start.png")
 
 
 

@@ -17,18 +17,13 @@ fps = 30
 fps_clock = pygame.time.Clock()
 
 # load images
-upLeft = pygame.image.load("E:\\hmm\\images\\UpLeft.png")
-upRight = pygame.image.load("E:\\hmm\\images\\UpRight.png")
-downLeft = pygame.image.load("E:\\hmm\\images\\DownLeft.png")
-downRight = pygame.image.load("E:\\hmm\\images\\DownRight.png")
+upLeft = pygame.image.load("images\\buttons\\UpLeft.png")
+upRight = pygame.image.load("images\\buttons\\UpRight.png")
+downLeft = pygame.image.load("images\\buttons\\DownLeft.png")
+downRight = pygame.image.load("images\\buttons\\DownRight.png")
 
-upLeftActive = pygame.image.load("E:\\hmm\\images\\UpLeftActive.png")
-upRightActive = pygame.image.load("E:\\hmm\\images\\UpRightActive.png")
-downLeftActive = pygame.image.load("E:\\hmm\\images\\DownLeftActive.png")
-downRightActive = pygame.image.load("E:\\hmm\\images\\DownRightActive.png")
-
-center = pygame.image.load("E:\\hmm\\images\\Center.png")
-glow = pygame.image.load("E:\\hmm\\images\\Glow.png")
+center = pygame.image.load("images\\buttons\\Center.png")
+glow = pygame.image.load("images\\buttons\\Glow.png")
 
 # load music
 pygame.mixer.init(44100, -16, 2, 2048)
@@ -86,7 +81,7 @@ def Result(p, g, b, m, s):
         display_surf.blit(score, (980, 425))
 
         # ranking
-        if s >= 40000:
+        if s >= 36000:
             rank = rank_S
         elif s >= 35000:
             rank = rank_A
@@ -190,7 +185,7 @@ class Game:
 
     def update(self):
         if self.upLeft.spawnTime == 0:
-            pygame.mixer.music.load("E:\\C4T\\Image Processing\\Game2\\Lucky-Strike.mp3")
+            pygame.mixer.music.load("song\\Lucky-Strike.mp3")
             pygame.mixer.music.play(1)
 
             # verse 1
@@ -652,7 +647,6 @@ def main():
                     else:
                         game.performance = "BAD"
                         game.bad += 1
-                    display_surf.blit(upLeftActive, buttonUpLeft)
                     display_surf.blit(glow, buttonUpLeft)
                     game.upLeft.points.remove([currentPoint_x, currentPoint_y])
 
@@ -673,7 +667,6 @@ def main():
                         game.performance = "GREAT"
                     else:
                         game.performance = "BAD"
-                    display_surf.blit(upRightActive, buttonUpRight)
                     display_surf.blit(glow, buttonUpRight)
                     game.upRight.points.remove([currentPoint_x, currentPoint_y])
 
@@ -694,7 +687,6 @@ def main():
                         game.performance = "GREAT"
                     else:
                         game.performance = "BAD"
-                    display_surf.blit(downLeftActive, buttonDownLeft)
                     display_surf.blit(glow, buttonDownLeft)
                     game.downLeft.points.remove([currentPoint_x, currentPoint_y])
 
@@ -715,7 +707,6 @@ def main():
                         game.performance = "GREAT"
                     else:
                         game.performance = "BAD"
-                    display_surf.blit(downRightActive, buttonDownRight)
                     display_surf.blit(glow, buttonDownRight)
                     game.downRight.points.remove([currentPoint_x, currentPoint_y])
         for event in pygame.event.get():
@@ -730,7 +721,7 @@ def Init():
     pygame.init()
     cam = webcam.Webcam()
     cam.thread_webcam()
-    pygame.mixer.music.load("E:\\C4T\\Image Processing\\Game2\\song\\opening-song.mp3")
+    pygame.mixer.music.load("song\\opening-song.mp3")
     pygame.mixer.music.play(1)
 
     while True:

@@ -1,11 +1,12 @@
 import cv2
 import numpy as np
 from threading import Thread
+from numba import jit
 
 lower = np.array([0, 0, 0])
 higher = np.array([255, 255, 117])
 
-
+@jit
 def Scan(a, m, n):
     count = 0
     for i in range(m, m + 64 + 1):

@@ -47,7 +47,6 @@ class Time():
 
 
 cap = cv2.VideoCapture(0)
-a = Time()
 while True:
     frame = cap.read()[1]
     frame = cv2.resize(frame, (1366, 786), cv2.INTER_CUBIC)

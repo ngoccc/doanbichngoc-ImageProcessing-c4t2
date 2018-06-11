@@ -13,7 +13,7 @@ display_surf = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 # display_surf = pygame.display.set_mode((800, 800))
 pygame.display.set_caption("dancing2")
 window_width, window_height = pygame.display.get_surface().get_size()
-fps = 30
+fps = 60
 fps_clock = pygame.time.Clock()
 
 # load images
@@ -91,7 +91,7 @@ def Result(p, g, b, m, s):
             rank = rank_C
         elif s >= 5000:
             rank = rank_D
-        elif s >= 1000:
+        else:
             rank = rank_F
         display_surf.blit(rank, (500, 500))
         pygame.display.update()
@@ -166,7 +166,7 @@ class Scoreboard:
 
 
 class Game:
-    def __init__(self, speed=5):
+    def __init__(self, speed=15):
         self.speed = speed
         point_speed = self.speed
         # points
@@ -191,362 +191,361 @@ class Game:
             # verse 1
         if self.upLeft.spawnTime == 0:
             self.upLeft.add()
-        if self.upRight.spawnTime == 34:
+        if self.upRight.spawnTime == 16:
             self.upRight.add()
-        if self.upLeft.spawnTime == 76:
+        if self.upLeft.spawnTime == 30:
             self.upLeft.add()
-        if self.upRight.spawnTime == 115:
+        if self.upRight.spawnTime == 45:
             self.upRight.add()
-        if self.downRight.spawnTime == 142:  # moti
+        if self.downRight.spawnTime == 54:  # moti
             self.downRight.add()
-        if self.upLeft.spawnTime == 180 and self.downRight.spawnTime == 180:
+        if self.upLeft.spawnTime == 68 and self.downRight.spawnTime == 68:
             self.upLeft.add()
             self.downRight.add()
-        if self.upRight.spawnTime == 195 and self.downLeft.spawnTime == 195:
+        if self.upRight.spawnTime == 70 and self.downLeft.spawnTime == 70:
             self.upRight.add()
             self.downLeft.add()
-        if self.downRight.spawnTime == 225 and self.downLeft.spawnTime == 225:
+        if self.downRight.spawnTime == 78 and self.downLeft.spawnTime == 78:
             self.downLeft.add()
             self.downRight.add()
-        if self.upRight.spawnTime == 235:  # yes
+        if self.upRight.spawnTime == 85:  # yes
             self.upRight.add()
-        if self.upRight.spawnTime == 260:  # yes
+        if self.upRight.spawnTime == 92:  # yes
             self.upRight.add()
 
-        if self.downLeft.spawnTime == 312:  # insti
+        if self.downLeft.spawnTime == 109:  # insti
             self.downLeft.add()
-        if self.upRight.spawnTime == 355 and self.downLeft.spawnTime == 355:
+        if self.upRight.spawnTime == 127 and self.downLeft.spawnTime == 127:
             self.upRight.add()
             self.downLeft.add()
-        if self.upLeft.spawnTime == 383 and self.downRight.spawnTime == 383:
+        if self.upLeft.spawnTime == 136 and self.downRight.spawnTime == 136:
             self.upLeft.add()
             self.downRight.add()
-        if self.downRight.spawnTime == 403 and self.downLeft.spawnTime == 403:
+        if self.downRight.spawnTime == 141 and self.downLeft.spawnTime == 141:
             self.downLeft.add()
             self.downRight.add()
-        if self.upLeft.spawnTime == 420:  # that's
+        if self.upLeft.spawnTime == 145:  # that's
             self.upLeft.add()
-        if self.upLeft.spawnTime == 442:  # that's
+        if self.upLeft.spawnTime == 154:  # that's
             self.upLeft.add()
 
-        if self.downLeft.spawnTime == 465:
+        if self.downLeft.spawnTime == 161:
             self.downLeft.add()
-        if self.upLeft.spawnTime == 511:
+        if self.upLeft.spawnTime == 177:
             self.upLeft.add()
-        if self.upRight.spawnTime == 548:
+        if self.upRight.spawnTime == 195:
             self.upRight.add()
-        if self.downRight.spawnTime == 585:
+        if self.downRight.spawnTime == 209:
             self.downRight.add()
-        if self.downRight.spawnTime == 629:
+
+        if self.downRight.spawnTime == 227:
             self.downRight.add()
-        if self.upRight.spawnTime == 669:
+        if self.upRight.spawnTime == 243:
             self.upRight.add()
-        if self.upLeft.spawnTime == 709:
+        if self.upLeft.spawnTime == 254:
             self.upLeft.add()
-        if self.downLeft.spawnTime == 735:
+        if self.downLeft.spawnTime == 262:
             self.downLeft.add()
-        #
-        if self.downRight.spawnTime == 760 and self.downLeft.spawnTime == 760:
-            self.downLeft.add()
-            self.downRight.add()
-        if self.downRight.spawnTime == 805 and self.downLeft.spawnTime == 805:
+        if self.downRight.spawnTime == 273 and self.downLeft.spawnTime == 273:
             self.downLeft.add()
             self.downRight.add()
 
-        if self.upRight.spawnTime == 835 and self.upLeft.spawnTime == 835:  # high
-            self.upRight.add()
-            self.upLeft.add()
-        if self.downRight.spawnTime == 860 and self.downLeft.spawnTime == 860:  # drop
+        if self.downRight.spawnTime == 288 and self.downLeft.spawnTime == 288:
             self.downLeft.add()
             self.downRight.add()
 
-        if self.downRight.spawnTime == 890:
-            self.downRight.add()
-        if self.upRight.spawnTime == 917:
+        if self.upRight.spawnTime == 298 and self.upLeft.spawnTime == 298:  # high
             self.upRight.add()
-        if self.upLeft.spawnTime == 945:
             self.upLeft.add()
-        if self.downLeft.spawnTime == 967:
+        if self.downRight.spawnTime == 309 and self.downLeft.spawnTime == 309:  # drop
             self.downLeft.add()
-        if self.downLeft.spawnTime == 1000:
-            self.downLeft.add()
-        if self.upLeft.spawnTime == 1020:
-            self.upLeft.add()
-        if self.upRight.spawnTime == 1040:
-            self.upRight.add()
-        if self.downRight.spawnTime == 1050:
             self.downRight.add()
 
-        if self.upLeft.spawnTime == 1150:
-            self.upLeft.add()
-        if self.upLeft.spawnTime == 1170:
-            self.upLeft.add()
-        if self.upRight.spawnTime == 1215:
-            self.upRight.add()
-        if self.upRight.spawnTime == 1235:
-            self.upRight.add()
-        if self.downRight.spawnTime == 1265:
+        if self.downRight.spawnTime == 320:  # drop me
             self.downRight.add()
-        if self.downRight.spawnTime == 1285:
-            self.downRight.add()
-        if self.upLeft.spawnTime == 1315:
+        if self.upRight.spawnTime == 328:  # drop me
+            self.upRight.add()
+        if self.upLeft.spawnTime == 336:  # drop me
             self.upLeft.add()
-        if self.upLeft.spawnTime == 1335:
+        if self.downLeft.spawnTime == 344:  # drop me
+            self.downLeft.add()
+
+        if self.downLeft.spawnTime == 360:
+            self.downLeft.add()
+        if self.upLeft.spawnTime == 368:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 376:
+            self.upRight.add()
+        if self.downRight.spawnTime == 384:
+            self.downRight.add()
+
+        if self.upLeft.spawnTime == 413:
+            self.upLeft.add()
+        if self.upLeft.spawnTime == 418:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 430 + 5:
+            self.upRight.add()
+        if self.upRight.spawnTime == 436 + 5:
+            self.upRight.add()
+        if self.downRight.spawnTime == 448 + 10:
+            self.downRight.add()
+        if self.downRight.spawnTime == 454 + 10:
+            self.downRight.add()
+        if self.upLeft.spawnTime == 466 + 10:
+            self.upLeft.add()
+        if self.upLeft.spawnTime == 472 + 10:
             self.upLeft.add()
 
-        if self.upRight.spawnTime == 1380 and self.upLeft.spawnTime == 1380:
+        if self.upRight.spawnTime == 490 + 3 and self.upLeft.spawnTime == 490 + 3:
             self.upLeft.add()
             self.upRight.add()
-        if self.upRight.spawnTime == 1400 and self.upLeft.spawnTime == 1400:
+        if self.upRight.spawnTime == 496 + 5 and self.upLeft.spawnTime == 496 + 5:
             self.upLeft.add()
             self.upRight.add()
-        if self.downRight.spawnTime == 1435 and self.downLeft.spawnTime == 1435:
+        if self.downRight.spawnTime == 504 + 5 and self.downLeft.spawnTime == 504 + 5:
             self.downLeft.add()
             self.downRight.add()
-        if self.downRight.spawnTime == 1455 and self.downLeft.spawnTime == 1455:
+        if self.downRight.spawnTime == 510 + 5 and self.downLeft.spawnTime == 510 + 5:
             self.downLeft.add()
             self.downRight.add()
 
         # verse 2
-        if self.downRight.spawnTime == 1500:  # elevator
+        if self.downRight.spawnTime == 537:  # elevator
             self.downRight.add()
-        if self.upLeft.spawnTime == 180 + 1363 and self.downRight.spawnTime == 180 + 1363:
+
+        if self.upLeft.spawnTime == 68 + 477 and self.downRight.spawnTime == 70 + 477:
             self.upLeft.add()
             self.downRight.add()
-        if self.upRight.spawnTime == 195 + 1363 and self.downLeft.spawnTime == 195 + 1363:
+        if self.upRight.spawnTime == 70 + 477 and self.downLeft.spawnTime == 70 + 477:
             self.upRight.add()
             self.downLeft.add()
-        if self.downRight.spawnTime == 225 + 1363 and self.downLeft.spawnTime == 225 + 1363:
-            self.downLeft.add()
+
+        if self.downRight.spawnTime == 78 + 478 and self.downLeft.spawnTime == 78 + 478:
+            self.downLeft.add()  # sky
             self.downRight.add()
-        if self.upRight.spawnTime == 235 + 1363:  # down
+        if self.upRight.spawnTime == 85 + 488:  # down
             self.upRight.add()
-        if self.upRight.spawnTime == 260 + 1363:  # down
+        if self.upRight.spawnTime == 92 + 488:  # down
             self.upRight.add()
-        #
-        if self.downLeft.spawnTime == 312 + 1363:  #
+
+        if self.downLeft.spawnTime == 109 + 488:  #
             self.downLeft.add()
-        if self.upRight.spawnTime == 345 + 1363 and self.downLeft.spawnTime == 345 + 1363:
+        if self.upRight.spawnTime == 127 + 488 and self.downLeft.spawnTime == 127 + 488:
             self.upRight.add()
             self.downLeft.add()
-        if self.upLeft.spawnTime == 373 + 1363 and self.downRight.spawnTime == 373 + 1363:
+        if self.upLeft.spawnTime == 136 + 488 and self.downRight.spawnTime == 136 + 488:
             self.upLeft.add()
             self.downRight.add()
-        if self.downRight.spawnTime == 393 + 1363 and self.downLeft.spawnTime == 393 + 1363:
+        if self.downRight.spawnTime == 141 + 488 and self.downLeft.spawnTime == 141 + 488:
             self.downLeft.add()
             self.downRight.add()
-        if self.upLeft.spawnTime == 410 + 1363:  # now
+        if self.upLeft.spawnTime == 145 + 488:  # now
             self.upLeft.add()
-        if self.upLeft.spawnTime == 432 + 1363:  # now
+        if self.upLeft.spawnTime == 154 + 488:  # now
             self.upLeft.add()
 
-        if self.downLeft.spawnTime == 465 + 1363:
+        if self.downLeft.spawnTime == 161 + 489:
             self.downLeft.add()
-        if self.upLeft.spawnTime == 511 + 1363:
+        if self.upLeft.spawnTime == 177 + 489:
             self.upLeft.add()
-        if self.upRight.spawnTime == 548 + 1363:
+        if self.upRight.spawnTime == 195 + 489:
             self.upRight.add()
-        if self.downRight.spawnTime == 585 + 1363:
+        if self.downRight.spawnTime == 209 + 489:
             self.downRight.add()
-        if self.downRight.spawnTime == 625 + 1363:
+        if self.downRight.spawnTime == 227 + 489:
             self.downRight.add()
-        if self.upRight.spawnTime == 665 + 1363:
+        if self.upRight.spawnTime == 243 + 490:
             self.upRight.add()
-        if self.upLeft.spawnTime == 704 + 1363:
+        if self.upLeft.spawnTime == 254 + 489:
             self.upLeft.add()
-        if self.downLeft.spawnTime == 731 + 1363:
+        if self.downLeft.spawnTime == 262 + 489:
             self.downLeft.add()
-        if self.downRight.spawnTime == 743 + 1363 and self.downLeft.spawnTime == 752 + 1363:
+        if self.downRight.spawnTime == 273 + 489 and self.downLeft.spawnTime == 273 + 489:
             self.downLeft.add()
             self.downRight.add()  # one in a million
-        if self.downRight.spawnTime == 796 + 1363 and self.downLeft.spawnTime == 805 + 1363:
+        if self.downRight.spawnTime == 288 + 489 and self.downLeft.spawnTime == 288 + 489:
             self.downLeft.add()
             self.downRight.add()
 
-        if self.upRight.spawnTime == 835 + 1363 and self.upLeft.spawnTime == 835 + 1363:
+        if self.upRight.spawnTime == 298 + 489 and self.upLeft.spawnTime == 298 + 489:
             self.upLeft.add()
             self.upRight.add()  # high
-        if self.downRight.spawnTime == 865 + 1363 and self.downLeft.spawnTime == 865 + 1363:
+        if self.downRight.spawnTime == 309 + 489 and self.downLeft.spawnTime == 309 + 489:
             self.downRight.add()
             self.downLeft.add()  # drop
-        if self.upRight.spawnTime == 895 + 1363:
+        if self.upRight.spawnTime == 320 + 489:
             self.upRight.add()
-        if self.upRight.spawnTime == 915 + 1363:
+        if self.upRight.spawnTime == 328 + 489:
             self.upRight.add()
-        if self.upRight.spawnTime == 937 + 1363 and self.upLeft.spawnTime == 937 + 1363:
+        if self.upRight.spawnTime == 336 + 489 and self.upLeft.spawnTime == 336 + 489:
             self.upRight.add()
             self.upLeft.add()
-        if self.downRight.spawnTime == 960 + 1363 and self.downLeft.spawnTime == 960 + 1363:
+        if self.downRight.spawnTime == 344 + 489 and self.downLeft.spawnTime == 344 + 489:
             self.downLeft.add()
             self.downRight.add()
 
-        if self.downRight.spawnTime == 990 + 1363:
+        if self.downRight.spawnTime == 360 + 489:
             self.downRight.add()
-        if self.upRight.spawnTime == 1017 + 1363:
+        if self.upRight.spawnTime == 368 + 489:
             self.upRight.add()
-        if self.upLeft.spawnTime == 1045 + 1363:
+        if self.upLeft.spawnTime == 376 + 489:
             self.upLeft.add()
-        if self.downLeft.spawnTime == 1070 + 1363:
+        if self.downLeft.spawnTime == 384 + 489:
             self.downLeft.add()
-        if self.downLeft.spawnTime == 1100 + 1363:
+        if self.downLeft.spawnTime == 413 + 489:
             self.downLeft.add()
-        if self.upLeft.spawnTime == 1120 + 1363:
+        if self.upLeft.spawnTime == 418 + 489:
             self.upLeft.add()
-        if self.upRight.spawnTime == 1140 + 1363:
+        if self.upRight.spawnTime == 435 + 489:
             self.upRight.add()
-        if self.downRight.spawnTime == 1150 + 1363:
+        if self.downRight.spawnTime == 441 + 489:
             self.downRight.add()  # what it sounds like
 
-        if self.upLeft.spawnTime == 1170 + 1363:
+        if self.upLeft.spawnTime == 458 + 489:
             self.upLeft.add()
-        if self.upLeft.spawnTime == 1190 + 1363:
+        if self.upLeft.spawnTime == 464 + 489:
             self.upLeft.add()
-        if self.upRight.spawnTime == 1235 + 1363:
+        if self.upRight.spawnTime == 476 + 489:
             self.upRight.add()
-        if self.upRight.spawnTime == 1260 + 1387:
+        if self.upRight.spawnTime == 482 + 5 + 489:
             self.upRight.add()
-        if self.downRight.spawnTime == 1285 + 1363:
-            self.downRight.add()
-        if self.downRight.spawnTime == 1305 + 1363:
-            self.downRight.add()
-        if self.upLeft.spawnTime == 1335 + 1363:
-            self.upLeft.add()
-        if self.upLeft.spawnTime == 1355 + 1363:
-            self.upLeft.add()
+        # if self.downRight.spawnTime == 493 + 489:
+        #     self.downRight.add()
+        # if self.downRight.spawnTime == 501 + 489:
+        #     self.downRight.add()
+        # if self.upLeft.spawnTime == 509 + 489:
+        #     self.upLeft.add()
+        # if self.upLeft.spawnTime == 515 + 489:
+        #     self.upLeft.add()
 
-        if self.upRight.spawnTime == 1380 + 1363 and self.upLeft.spawnTime == 1380 + 1363:
+        if self.upRight.spawnTime == 493 + 489 and self.upLeft.spawnTime == 493 + 489:
             self.upLeft.add()
             self.upRight.add()
-        if self.upRight.spawnTime == 1400 + 1363 and self.upLeft.spawnTime == 1400 + 1363:
+        if self.upRight.spawnTime == 501 + 489 and self.upLeft.spawnTime == 501 + 489:
             self.upLeft.add()
             self.upRight.add()
-        if self.downRight.spawnTime == 1435 + 1363 and self.downLeft.spawnTime == 1435 + 1363:
+        if self.downRight.spawnTime == 509 + 489 and self.downLeft.spawnTime == 509 + 489:
             self.downLeft.add()
             self.downRight.add()
-        if self.downRight.spawnTime == 1455 + 1363 and self.downLeft.spawnTime == 1455 + 1363:
+        if self.downRight.spawnTime == 515 + 489 and self.downLeft.spawnTime == 515 + 489:
             self.downLeft.add()
             self.downRight.add()
 
             # beat drop
-        if self.downLeft.spawnTime == 2845:  # hey
+        if self.downLeft.spawnTime == 1015:  # hey
             self.downLeft.add()
-        if self.downRight.spawnTime == 2865:  # taking
+        if self.downRight.spawnTime == 1027:  # taking
             self.downRight.add()
-        if self.downLeft.spawnTime == 2885:  # pain
+        if self.downLeft.spawnTime == 1035:  # pain
             self.downLeft.add()
-        if self.upRight.spawnTime == 2915 and self.upLeft.spawnTime == 2915:
+        if self.upRight.spawnTime == 1055 and self.upLeft.spawnTime == 1055:
             self.upLeft.add()
             self.upRight.add()  # away
-        if self.downRight.spawnTime == 2945:  # shaking
+        if self.downRight.spawnTime == 1064:  # shaking
             self.downRight.add()
-        if self.downLeft.spawnTime == 2975:  # earth
+        if self.downLeft.spawnTime == 1076:  # earth
             self.downLeft.add()
-        if self.upLeft.spawnTime == 3000:
+        if self.upLeft.spawnTime == 1090:
             self.upLeft.add()
-        if self.upRight.spawnTime == 3025:
+        if self.upRight.spawnTime == 1096:
             self.upRight.add()
-        if self.downRight.spawnTime == 3050:
+        if self.downRight.spawnTime == 1105:
             self.downRight.add()
-        if self.downRight.spawnTime == 3095:  # eh
+        if self.downRight.spawnTime == 1110:  # eh
             self.downRight.add()
-        if self.upRight.spawnTime == 3115:
+        if self.upRight.spawnTime == 1118:  # eh
             self.upRight.add()
-        if self.upLeft.spawnTime == 3130:
+        if self.upLeft.spawnTime == 1126:  # eh
             self.upLeft.add()
-        if self.downLeft.spawnTime == 3145:
-            self.downLeft.add()
 
-        if self.downLeft.spawnTime == 3165:  # hey
+        if self.downLeft.spawnTime == 1015 + 126:  # hey
             self.downLeft.add()
-        if self.downRight.spawnTime == 2865 + 320:  # taking
+        if self.downRight.spawnTime == 1027 + 126:  # taking
             self.downRight.add()
-        if self.downLeft.spawnTime == 2885 + 320:  # pain
+        if self.downLeft.spawnTime == 1035 + 126:  # pain
             self.downLeft.add()
-        if self.upRight.spawnTime == 2915 + 320 and self.upLeft.spawnTime == 2915 + 320:
+        if self.upRight.spawnTime == 1055 + 126 and self.upLeft.spawnTime == 1055 + 126:
             self.upLeft.add()
             self.upRight.add()  # away
-        if self.downRight.spawnTime == 2945 + 320:  # shaking
+        if self.downRight.spawnTime == 1064 + 126:  # shaking
             self.downRight.add()
-        if self.downLeft.spawnTime == 2975 + 320:  # earth
+        if self.downLeft.spawnTime == 1076 + 126:  # earth
             self.downLeft.add()
-        if self.upLeft.spawnTime == 3000 + 320:
+        if self.upLeft.spawnTime == 1090 + 126:
             self.upLeft.add()
-        if self.upRight.spawnTime == 3025 + 320:
+        if self.upRight.spawnTime == 1096 + 126:
             self.upRight.add()
-        if self.downRight.spawnTime == 3050 + 320:
+        if self.downRight.spawnTime == 1105 + 126:
             self.downRight.add()
-        if self.downRight.spawnTime == 3095 + 320:  # eh
+        if self.downRight.spawnTime == 1110 + 126:  # eh
             self.downRight.add()
-        if self.upRight.spawnTime == 3115 + 320:
+        if self.upRight.spawnTime == 1118 + 126:  # eh
             self.upRight.add()
-        if self.upLeft.spawnTime == 3130 + 320:
+        if self.upLeft.spawnTime == 1126 + 126:  # eh
             self.upLeft.add()
-        if self.downLeft.spawnTime == 3145 + 320:
-            self.downLeft.add()
 
             # verse 3:
-        if self.upRight.spawnTime == 3700 and self.upLeft.spawnTime == 3700:
+        if self.upRight.spawnTime == 298 + 489 + 502 and self.upLeft.spawnTime == 298 + 489 + 502:
             self.upLeft.add()
             self.upRight.add()  # high
-        if self.downRight.spawnTime == 865 + 1387 + 1502 and self.downLeft.spawnTime == 865 + 1387 + 1502:
+        if self.downRight.spawnTime == 309 + 489 + 502 and self.downLeft.spawnTime == 309 + 489 + 502:
             self.downRight.add()
             self.downLeft.add()  # drop
-        if self.upRight.spawnTime == 895 + 1387 + 1502:
+        if self.upRight.spawnTime == 320 + 489 + 502:
             self.upRight.add()
-        if self.upRight.spawnTime == 915 + 1387 + 1502:
+        if self.upRight.spawnTime == 328 + 489 + 502:
             self.upRight.add()
-        if self.upRight.spawnTime == 937 + 1387 + 1502 and self.upLeft.spawnTime == 937 + 1387 + 1502:
+        if self.upRight.spawnTime == 336 + 489 + 502 and self.upLeft.spawnTime == 336 + 489 + 502:
             self.upRight.add()
             self.upLeft.add()
-        if self.downRight.spawnTime == 960 + 1387 + 1502 and self.downLeft.spawnTime == 960 + 1387 + 1502:
+        if self.downRight.spawnTime == 344 + 489 + 502 and self.downLeft.spawnTime == 344 + 489 + 502:
             self.downLeft.add()
             self.downRight.add()
 
-        if self.downLeft.spawnTime == 990 + 1387 + 1502:
-            self.downLeft.add()
-        if self.upRight.spawnTime == 1017 + 1387 + 1502:
-            self.upRight.add()
-        if self.upLeft.spawnTime == 1045 + 1387 + 1502:
-            self.upLeft.add()
-        if self.downRight.spawnTime == 1070 + 1387 + 1502:
+        if self.downRight.spawnTime == 360 + 489 + 502:
             self.downRight.add()
-        if self.downLeft.spawnTime == 1100 + 1387 + 1502 and self.upRight.spawnTime == 1100 + 1387 + 1502:
-            self.downLeft.add()
+        if self.upRight.spawnTime == 368 + 489 + 502:
             self.upRight.add()
-        if self.upLeft.spawnTime == 1120 + 1387 + 1502 and self.upRight.spawnTime == 1120 + 1387 + 1502:
+        if self.upLeft.spawnTime == 376 + 489 + 502:
             self.upLeft.add()
-        if self.downRight.spawnTime == 1140 + 1387 + 1502 and self.downLeft.spawnTime == 1140 + 1387 + 1502:
+        if self.downLeft.spawnTime == 384 + 489 + 502:
+            self.downLeft.add()
+        if self.downLeft.spawnTime == 413 + 489 + 502:
+            self.downLeft.add()
+        if self.upLeft.spawnTime == 418 + 489 + 502:
+            self.upLeft.add()
+        if self.upRight.spawnTime == 435 + 489 + 502:
             self.upRight.add()
-        if self.downRight.spawnTime == 1150 + 1387 + 1502 and self.upLeft.spawnTime == 1150 + 1387 + 1502:
+        if self.downRight.spawnTime == 441 + 489 + 502:
             self.downRight.add()  # what it sounds like
 
-        if self.upLeft.spawnTime == 1170 + 1387 + 1502:
+        if self.upLeft.spawnTime == 458 + 489 + 502:
             self.upLeft.add()
-        if self.upLeft.spawnTime == 1190 + 1387 + 1502:
+        if self.upLeft.spawnTime == 464 + 489 + 502:
             self.upLeft.add()
-        if self.upRight.spawnTime == 1235 + 1387 + 1502:
+        if self.upRight.spawnTime == 476 + 489 + 502:
             self.upRight.add()
-        if self.upRight.spawnTime == 1260 + 1387 + 1502:
+        if self.upRight.spawnTime == 482 + 5 + 489 + 502:
             self.upRight.add()
-        if self.downRight.spawnTime == 1285 + 1387 + 1502:
-            self.downRight.add()
-        if self.downRight.spawnTime == 1305 + 1387 + 1502:
-            self.downRight.add()
-        if self.upLeft.spawnTime == 1335 + 1387 + 1502 and self.upRight.spawnTime == 1335 + 1387 + 1502:
-            self.upLeft.add()
-        if self.upLeft.spawnTime == 1355 + 1387 + 1502 and self.upRight.spawnTime == 1355 + 1387 + 1502:
-            self.upLeft.add()
+        # if self.downRight.spawnTime == 493 + 489 + 502:
+        #     self.downRight.add()
+        # if self.downRight.spawnTime == 501 + 489 + 502:
+        #     self.downRight.add()
+        # if self.upLeft.spawnTime == 509 + 489 + 502:
+        #     self.upLeft.add()
+        # if self.upLeft.spawnTime == 515 + 489 + 502:
+        #     self.upLeft.add()
 
-        if self.upRight.spawnTime == 1380 + 1387 + 1502 and self.upLeft.spawnTime == 1380 + 1387 + 1502:
+        if self.upRight.spawnTime == 493 + 489 + 502 and self.upLeft.spawnTime == 493 + 489 + 502:
             self.upLeft.add()
             self.upRight.add()
-        if self.upRight.spawnTime == 1400 + 1387 + 1502 and self.upLeft.spawnTime == 1400 + 1387 + 1502:
+        if self.upRight.spawnTime == 501 + 489 + 502 and self.upLeft.spawnTime == 501 + 489 + 502:
             self.upLeft.add()
             self.upRight.add()
-        if self.downRight.spawnTime == 1435 + 1387 + 1502 and self.downLeft.spawnTime == 1435 + 1387 + 1502:
+        if self.downRight.spawnTime == 509 + 489 + 502 and self.downLeft.spawnTime == 509 + 489 + 502:
             self.downLeft.add()
             self.downRight.add()
-        if self.downRight.spawnTime == 1455 + 1387 + 1502 and self.downLeft.spawnTime == 1455 + 1387 + 1502:
+        if self.downRight.spawnTime == 515 + 489 + 502 and self.downLeft.spawnTime == 515 + 489 + 502:
             self.downLeft.add()
             self.downRight.add()
 
@@ -662,11 +661,14 @@ def main():
                     if distance <= d / 3:
                         game.score.score += 200
                         game.performance = "PERFECT"
+                        game.perfect += 1
                     elif distance <= 2 * d / 3:
                         game.score.score += 100
                         game.performance = "GREAT"
+                        game.great += 1
                     else:
                         game.performance = "BAD"
+                        game.bad += 1
                     display_surf.blit(glow, buttonUpRight)
                     game.upRight.points.remove([currentPoint_x, currentPoint_y])
 
@@ -682,11 +684,14 @@ def main():
                     if distance <= d / 3:
                         game.score.score += 200
                         game.performance = "PERFECT"
+                        game.perfect += 1
                     elif distance <= 2 * d / 3:
                         game.score.score += 100
                         game.performance = "GREAT"
+                        game.great += 1
                     else:
                         game.performance = "BAD"
+                        game.bad += 1
                     display_surf.blit(glow, buttonDownLeft)
                     game.downLeft.points.remove([currentPoint_x, currentPoint_y])
 
@@ -702,11 +707,14 @@ def main():
                     if distance <= d / 3:
                         game.score.score += 200
                         game.performance = "PERFECT"
+                        game.perfect += 1
                     elif distance <= 2 * d / 3:
                         game.score.score += 100
                         game.performance = "GREAT"
+                        game.great += 1
                     else:
                         game.performance = "BAD"
+                        game.bad += 1
                     display_surf.blit(glow, buttonDownRight)
                     game.downRight.points.remove([currentPoint_x, currentPoint_y])
         for event in pygame.event.get():

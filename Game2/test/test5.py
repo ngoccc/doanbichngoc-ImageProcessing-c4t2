@@ -91,7 +91,7 @@ def Result(p, g, b, m, s):
             rank = rank_C
         elif s >= 5000:
             rank = rank_D
-        elif s >= 1000:
+        else:
             rank = rank_F
         display_surf.blit(rank, (500, 500))
         pygame.display.update()
@@ -105,7 +105,6 @@ class Point:
         self.direction = dir
         self.start_pos = start_pos
         self.speed = speed
-        # self.points.append(list(self.start_pos))
         self.spawnTime = 0
         self.isMissed = False
 
